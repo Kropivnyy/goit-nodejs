@@ -1,33 +1,19 @@
-const argv = require("yargs").argv;
-const contacts = require("./contacts");
+const dotenv = require("dotenv");
+dotenv.config();
+const express = require("express");
+const app = express();
+const morgan = require("morgan");
+const cors = require("cors");
+const PORT = process.env.PORT || 3000;
+const contactsRouter = require("./api/contacts/router");
 
-async function invokeAction({ action, id, name, email, phone }) {
-  switch (action) {
-    case "list":
-      const list = await contacts.listContacts();
-      console.table(list);
-      break;
+app.use(morgan("dev"));
+app.use(cors());
 
-    case "get":
-      const contact = await contacts.getContactById(id);
-      console.log(contact);
-      break;
+app.use(express.json());
 
-    case "add":
-      await contacts.addContact(name, email, phone);
-      const listAfterAddition = await contacts.listContacts();
-      console.table(listAfterAddition);
-      break;
+app.use("/api/contacts", contactsRouter);
 
-    case "remove":
-      await contacts.removeContact(id);
-      const listAfterDeletion = await contacts.listContacts();
-      console.table(listAfterDeletion);
-      break;
-
-    default:
-      console.warn("\x1B[31m Unknown action type!");
-  }
-}
-
-invokeAction(argv);
+app.listen(PORT, function () {
+  console.log(`CORS-enabled web server listening on port ${PORT}`);
+});

@@ -28,9 +28,19 @@ async function addContact(name, email, phone) {
   await fs.writeFile(contactsPath, JSON.stringify(editedContacts));
 }
 
+async function updateContact(id, updatedContact) {
+  const contacts = await listContacts();
+  const editedContacts = [
+    ...contacts.filter((contact) => contact.id !== id),
+    updatedContact,
+  ];
+  await fs.writeFile(contactsPath, JSON.stringify(editedContacts));
+}
+
 module.exports = {
   listContacts,
   getContactById,
   removeContact,
   addContact,
+  updateContact,
 };
