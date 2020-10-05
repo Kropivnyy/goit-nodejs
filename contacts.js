@@ -20,9 +20,10 @@ async function removeContact(contactId) {
 
 async function addContact(name, email, phone) {
   const contacts = await listContacts();
+  const idsArray = contacts.map((contact) => contact.id);
   const editedContacts = [
     ...contacts,
-    { id: contacts[contacts.length - 1].id + 1, name, email, phone },
+    { id: Math.max(...idsArray) + 1, name, email, phone },
   ];
   await fs.writeFile(contactsPath, JSON.stringify(editedContacts));
 }
