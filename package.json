@@ -1,0 +1,30 @@
+{
+  "name": "goit-nodejs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kropivnyy/goit-nodejs.git"
+  },
+  "author": "Alexander Kropivnyy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kropivnyy/goit-nodejs/issues"
+  },
+  "homepage": "https://github.com/Kropivnyy/goit-nodejs#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.4",
+    "yargs": "^16.0.3"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0"
+  }
+}
